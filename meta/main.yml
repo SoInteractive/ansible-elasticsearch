@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Pawel Krupa
+  description: Elasticsearch
+  company: Sointeractive
+  min_ansible_version: 2.0
+  platforms:
+   - name: EL
+     versions:
+       - all
+   - name: Ubuntu
+     versions:
+       - 16.04
+  galaxy_tags:
+   - elasticsearch
+   - database
+
+dependencies:
+  - { role: java }
+
