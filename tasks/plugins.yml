@@ -1,0 +1,24 @@
+---
+# TODO add support for installing plugins from local file
+
+- name: Install elasticsearch plugins
+  command: "{{ elasticsearch_home }}/bin/plugin install {{ item.plugin }}{% if item.version is defined and item.version != '' %}/{{ item.version }}{% endif %} {% if http_proxy is defined %} -DproxyHost={{ http_proxy.split('/')[-1].split(':')[0] }} -DproxyPort={{ http_proxy.split('/')[-1].split(':')[1] }}{% endif %} --silent"
+  register: plugin_installed
+  failed_when: "'ERROR' in plugin_installed.stdout"
+  changed_when: plugin_installed.rc == 0
+  with_items: "{{ elasticsearch_plugins }}"
+  notify: restart elasticsearch
+  args:
+    executable: "/bin/bash"
+  environment:
+    CONF_DIR: "{{ elasticsearch_conf_dir }}"
+#    ES_INCLUDE: "{{ instance_default_file }}"
+
+#Set permissions on plugins directory
+- name: Set Plugin Directory Permissions
+  file: 
+    state: directory
+    path: "{{ elasticsearch_home }}/plugins"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    recurse: yes
