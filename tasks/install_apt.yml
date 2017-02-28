@@ -6,7 +6,7 @@
 
 - name: Add Elasticsearch repository key [Ubuntu]
   apt_key: 
-    url: "https://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+    url: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
     state: present
   environment:
     http_proxy: "{{ http_proxy | default('') }}"
