@@ -3,6 +3,10 @@
 {{ elasticsearch_config | to_nice_yaml }}
 {% endif %}
 
+{% if elasticsearch_config['network.host'] is not defined %}
+network.host: localhost
+{% endif %}
+
 {% if elasticsearch_config['cluster.name'] is not defined %}
 cluster.name: elasticsearch
 {% endif %}
