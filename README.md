@@ -3,7 +3,7 @@
 Ansible Role: elasticsearch
 ===================
 
-[![Build Status](https://ci.devops.sosoftware.pl/buildStatus/icon?job=SoInteractive/elasticsearch/master)](https://ci.devops.sosoftware.pl/blue/organizations/jenkins/SoInteractive%2Felasticsearch/activity) [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Ansible Role](https://img.shields.io/ansible/role/99999.svg)](https://galaxy.ansible.com/SoInteractive/elasticsearch/) [![Twitter URL](https://img.shields.io/twitter/follow/sointeractive.svg?style=social&label=Follow%20%40SoInteractive)](https://twitter.com/sointeractive)
+[![Build Status](https://ci.devops.sosoftware.pl/buildStatus/icon?job=SoInteractive/elasticsearch/master)](https://ci.devops.sosoftware.pl/blue/organizations/jenkins/SoInteractive%2Felasticsearch/activity) [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Ansible Role](https://img.shields.io/ansible/role/18251.svg)](https://galaxy.ansible.com/SoInteractive/elasticsearch/) [![Twitter URL](https://img.shields.io/twitter/follow/sointeractive.svg?style=social&label=Follow%20%40SoInteractive)](https://twitter.com/sointeractive)
 
 Elasticsearch, distributed, RESTful search and analytics engine
 
