@@ -5,7 +5,7 @@
     state: present
 
 - name: Add Elasticsearch repository key [Ubuntu]
-  apt_key: 
+  apt_key:
     url: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
     state: present
   environment:
@@ -18,7 +18,7 @@
     state: present
 
 - name: Ensure elasticsearch is installed
-  apt: 
+  apt:
     name: "elasticsearch{% if elasticsearch_version != '' %}={{ es_version }}{% endif %}"
     state: present
     cache_valid_time: 86400

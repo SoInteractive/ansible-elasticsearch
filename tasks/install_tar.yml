@@ -10,10 +10,10 @@
     src: "/tmp/elasticsearch-{{ elasticsearch_version }}.tar.gz"
     dest: "{{ elasticsearch_install_dir }}"
 
-- name: Add ES_HOME variable 
-  lineinfile:  
+- name: Add ES_HOME variable
+  lineinfile:
     dest: "{{ ansible_user_dir }}/.profile"
-    line: "export ES_HOME={{ elasticsearch_home_dir }}" 
+    line: "export ES_HOME={{ elasticsearch_home_dir }}"
     regexp: "export ES_HOME=*"
 
 - name : Copy config dir (add synonims and dictionaries)

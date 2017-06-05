@@ -7,21 +7,19 @@ elasticsearch_pid_dir: "/var/run/elasticsearch"
 elasticsearch_log_dir: "/var/log/elasticsearch"
 elasticsearch_conf_dir: "/etc/elasticsearch"
 elasticsearch_work_dir: "/tmp/elasticsearch"
-elasticsearch_data_dirs: 
+elasticsearch_data_dirs:
   - "/var/lib/elasticsearch"
 elasticsearch_home: "/usr/share/elasticsearch"
-
 
 elasticsearch_api_host: "localhost"
 elasticsearch_api_port: 9200
 
-#elasticsearch_version: "2.4.3" 
-elasticsearch_version: '' 
+#elasticsearch_version: "2.4.3"
+elasticsearch_version: ''
 
 # TAR-based user install
 elasticsearch_user_install: False
 elasticsearch_install_dir: "{{ ansible_user_dir }}/elasticsearch"
-
 
 # Configuration
 elasticsearch_instance_name: "fromage"

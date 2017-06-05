@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies
-  apt:
+  yum:
     name: libselinux-python
     state: present
 
@@ -10,7 +10,7 @@
     dest: /etc/yum.repos.d/elasticsearch.repo
 
 - name: RedHat - Install Elasticsearch
-  yum: 
+  yum:
     name: "elasticsearch{% if elasticsearch_version != ''  %}-{{ elasticsearch_version }}{% endif %}"
     state: present
     update_cache: yes

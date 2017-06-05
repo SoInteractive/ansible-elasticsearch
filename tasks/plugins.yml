@@ -16,7 +16,7 @@
 
 #Set permissions on plugins directory
 - name: Set Plugin Directory Permissions
-  file: 
+  file:
     state: directory
     path: "{{ elasticsearch_home }}/plugins"
     owner: "{{ elasticsearch_user }}"

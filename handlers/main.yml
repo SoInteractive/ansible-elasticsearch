@@ -1,7 +1,7 @@
 ---
 - name: start elasticsearch
-  service: 
-    name: elasticsearch 
+  service:
+    name: elasticsearch
     state: started
     enabled: yes
 
@@ -9,4 +9,3 @@
   service:
     name: elasticsearch
     state: restarted
-
