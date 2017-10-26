@@ -25,6 +25,10 @@ elasticsearch_install_dir: "{{ ansible_user_dir }}/elasticsearch"
 elasticsearch_instance_name: "fromage"
 elasticsearch_config: {}
 
+#Cluster
+elasticsearch_cluster_name: "Elasticsearch Cluster"
+elasticsearch_hosts_group: "elasticsearch"
+
 # Additional plugins
 elasticsearch_plugins:
   - plugin: mobz/elasticsearch-head

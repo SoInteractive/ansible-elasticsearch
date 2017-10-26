@@ -1,3 +1,4 @@
+
 ---
 ansible:
   playbook: tests/playbook.yml
@@ -14,3 +15,19 @@ docker:
       image: centos/systemd
       image_version: latest
       privileged: true
+
+    - name: elasticsearch-node01
+      image: ubuntu
+      image_version: xenial
+      ansible_groups:
+        - elasticsearch
+    - name: elasticsearch-node02
+      image: ubuntu
+      image_version: xenial
+      ansible_groups:
+        - elasticsearch  
+    - name: elasticsearch-node03
+      image: ubuntu
+      image_version: xenial
+      ansible_groups:
+        - elasticsearch

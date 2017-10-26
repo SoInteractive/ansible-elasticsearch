@@ -1,20 +1,4 @@
 # {{ ansible_managed }}
-{% if elasticsearch_config %}
-{{ elasticsearch_config | to_nice_yaml }}
-{% endif %}
-
-{% if elasticsearch_config['network.host'] is not defined %}
-network.host: localhost
-{% endif %}
-
-{% if elasticsearch_config['cluster.name'] is not defined %}
-cluster.name: elasticsearch
-{% endif %}
-
-{% if elasticsearch_config['node.name'] is not defined %}
-node.name: {{ inventory_hostname }}-{{ elasticsearch_instance_name }}
-{% endif %}
-
 #################################### Paths ####################################
 
 # Path to directory containing configuration (this file and logging.yml):
@@ -24,4 +8,12 @@ path.data: {{ elasticsearch_data_dirs | join(',') }}
 
 path.work: {{ elasticsearch_work_dir }}
 
-path.logs: {{ elasticsearch_log_dir }}
+path.logs: {{ elasticsearch_log_dir }}i
+
+#################################### Network ##################################
+
+network.host: {{ elasticsearch_network_host }}
+http.port: {{ elasticsearch_http_port }}
+
+#################################### Discovery ################################
+discovery.zen.ping.unicast.hosts {{ groups [ elasticsearch_hosts_group ] }} 
