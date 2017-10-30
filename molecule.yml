@@ -1,6 +1,7 @@
 
 ---
 ansible:
+#  verbose: vvv
   playbook: tests/playbook.yml
 driver:
   name: docker

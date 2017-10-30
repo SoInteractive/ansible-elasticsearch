@@ -20,6 +20,10 @@
   with_items:
     - "{{ elasticsearch_data_dirs }}"
 
+- name: debug
+  debug:
+    var: ansible_default_ipv4.address
+
 - name: Copy Configuration File
   template:
     src: elasticsearch.yml.j2
@@ -29,6 +33,10 @@
     mode: 0644
   register: config_updated
   notify: restart elasticsearch
+
+- name: debug
+  debug:
+    var: ansible_default_ipv4.address
 
 #- name: Copy Default File for Instance
 #  template:
