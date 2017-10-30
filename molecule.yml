@@ -11,6 +11,8 @@ docker:
     - name: elasticsearch-xenial
       image: solita/ubuntu-systemd
       image_version: 16.04
+      privileged: true
+
     - name: elasticsearch-centos
       image: centos/systemd
       image_version: latest
@@ -19,15 +21,18 @@ docker:
     - name: elasticsearch-node01
       image: solita/ubuntu-systemd
       image_version: 16.04
+      privileged: true
       ansible_groups:
         - elasticsearch
     - name: elasticsearch-node02
       image: solita/ubuntu-systemd
       image_version: 16.04
+      privileged: true
       ansible_groups:
         - elasticsearch
     - name: elasticsearch-node03
       image: solita/ubuntu-systemd
       image_version: 16.04
+      privileged: true
       ansible_groups:
         - elasticsearch
