@@ -14,10 +14,10 @@ docker:
       image_version: 16.04
       privileged: true
 
-    - name: elasticsearch-centos
-      image: centos/systemd
-      image_version: latest
-      privileged: true
+#    - name: elasticsearch-centos
+#      image: centos/systemd
+#      image_version: latest
+#      privileged: true
 
     - name: elasticsearch-node01
       image: solita/ubuntu-systemd
