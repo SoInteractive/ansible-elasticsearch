@@ -8,7 +8,7 @@ path.data: {{ elasticsearch_data_dirs | join(',') }}
 
 path.work: {{ elasticsearch_work_dir }}
 
-path.logs: {{ elasticsearch_log_dir }}i
+path.logs: {{ elasticsearch_log_dir }}
 
 #################################### Network ##################################
 
@@ -16,4 +16,4 @@ path.logs: {{ elasticsearch_log_dir }}i
 http.port: {{ elasticsearch_http_port }}
 
 #################################### Discovery ################################
-discovery.zen.ping.unicast.hosts {{ groups [ elasticsearch_hosts_group ] }} 
+discovery.zen.ping.unicast.hosts: {{ groups [ elasticsearch_hosts_group ] }} 
