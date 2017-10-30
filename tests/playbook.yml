@@ -6,7 +6,9 @@
         name: "{{ item }}"
         state: present
       with_items:
-        - inetutils-ping
+        - iproute 
+        # inetutils-ping
+      when: ansible_distribution == 'Ubuntu'
 
 - hosts: all
   roles:
