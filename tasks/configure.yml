@@ -30,6 +30,13 @@
   register: config_updated
   notify: restart elasticsearch
 
+
+# - name: Install additional plugins
+#   elasticsearch_plugin:
+#     name: "{{ item }}"
+#     state: present
+#   with_items: elasticsearch_plugins
+
 #- name: Copy Default File for Instance
 #  template:
 #    src: elasticsearch.j2
