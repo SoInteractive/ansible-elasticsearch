@@ -9,25 +9,25 @@ verifier:
 docker:
   containers:
     - name: elasticsearch-xenial
-      image: ubuntu
-      image_version: xenial
+      image: solita/ubuntu-systemd
+      image_version: 16.04
     - name: elasticsearch-centos
       image: centos/systemd
       image_version: latest
       privileged: true
 
     - name: elasticsearch-node01
-      image: ubuntu
-      image_version: xenial
+      image: solita/ubuntu-systemd
+      image_version: 16.04
       ansible_groups:
         - elasticsearch
     - name: elasticsearch-node02
-      image: ubuntu
-      image_version: xenial
+      image: solita/ubuntu-systemd
+      image_version: 16.04
       ansible_groups:
-        - elasticsearch  
+        - elasticsearch
     - name: elasticsearch-node03
-      image: ubuntu
-      image_version: xenial
+      image: solita/ubuntu-systemd
+      image_version: 16.04
       ansible_groups:
         - elasticsearch

@@ -12,7 +12,7 @@ elasticsearch_data_dirs:
 elasticsearch_home: "/usr/share/elasticsearch"
 
 elasticsearch_api_host: "localhost"
-elasticsearch_api_port: 9200
+elasticsearch_http_port: 9200
 
 #elasticsearch_version: "2.4.3"
 elasticsearch_version: ''
