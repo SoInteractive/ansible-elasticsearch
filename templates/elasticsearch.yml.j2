@@ -17,7 +17,7 @@ path.logs: {{ elasticsearch_log_dir }}
 
 #################################### Network ##################################
 
-network.host: {{ ansible_default_ipv4.address }}
+network.host: {{ elasticsearch_address }}
 http.port: {{ elasticsearch_http_port }}
 
 #################################### Discovery ################################

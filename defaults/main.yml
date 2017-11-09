@@ -11,7 +11,9 @@ elasticsearch_data_dirs:
   - "/var/lib/elasticsearch"
 elasticsearch_home: "/usr/share/elasticsearch"
 
-elasticsearch_api_host: "localhost"
+elasticsearch_interface: "{{ ansible_default_ipv4.interface }}"
+
+elasticsearch_address: "{{ hostvars[inventory_hostname]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}"
 elasticsearch_http_port: 9200
 
 #elasticsearch_version: "2.4.3"
