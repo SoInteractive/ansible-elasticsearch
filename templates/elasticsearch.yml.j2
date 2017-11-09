@@ -2,7 +2,7 @@
 
 cluster.name: {{ elasticsearch_cluster_name }}
 
-node.name: {{ elasticsearch_instance_name }}
+node.name: {{ inventory_hostname }}-{{ elasticsearch_instance_name }}
 
 #################################### Paths ####################################
 
