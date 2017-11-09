@@ -25,7 +25,7 @@ elasticsearch_install_dir: "{{ ansible_user_dir }}/elasticsearch"
 elasticsearch_instance_name: "fromage"
 
 #Cluster
-elasticsearch_cluster_name: "Elasticsearch Cluster"
+elasticsearch_cluster_name: "elasticsearch_cluster"
 elasticsearch_hosts_group: "elasticsearch"
 
 # Additional plugins
