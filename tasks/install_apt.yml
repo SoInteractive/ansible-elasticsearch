@@ -14,7 +14,7 @@
 
 - name: Add elasticsearch repository [Ubuntu]
   apt_repository:
-    repo: "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main"
+    repo: "deb https://packages.elastic.co/elasticsearch/5.x/debian stable main"
     state: present
 
 - name: Ensure elasticsearch is installed
