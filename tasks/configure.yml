@@ -20,17 +20,13 @@
   with_items:
     - "{{ elasticsearch_data_dirs }}"
 
-- name: adjust jvm settings (1/2)
-  lineinfile:
-    regexp: "-Xms"
-    line: "-Xms{{ (ansible_memtotal_mb*0.25)|int }}m"
-    path: "/etc/elasticsearch/jvm.options"
-
-- name: adjust jvm settings (2/2)
-  lineinfile:
-    regexp: "-Xmx"
-    line: "-Xmx{{ (ansible_memtotal_mb*0.25)|int }}m"
-    path: "/etc/elasticsearch/jvm.options"
+- name: adjust jvm settings
+  template:
+    src: jvm.options.j2
+    dest: "{{ elasticsearch_conf_dir }}/jvm.options"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    mode: 0644
 
 - name: Copy Configuration File
   template:
