@@ -1,0 +1,18 @@
+---
+- name: debug
+  debug:
+    msg: "{{ ([elasticsearch_memory.max[-1]]|map('extract', {'m': elasticsearch_memory.max[:-1]|int*1024, 'g': elasticsearch_memory.max[:-1]|int*1024*1024})|list)[0]|int }}"
+
+#- name: debug
+#  debug:
+#    msg: "{{ ['256m[-1]','2g[-1]']|map('extract', {'*m': 1024, '*g': 1024*1024})|list }}"
+
+- name: debug
+  debug:
+    msg: "{{ ansible_memtotal_mb * 0.5  }}"
+
+- name: check if max memory exceeded recommended value
+  fail:
+    msg: Maximum memory for elasticsearch should not be greater than half of physycal RAM
+  when: " ([elasticsearch_memory.max[-1]]|map('extract', {'m': elasticsearch_memory.max[:-1]|int*1024, 'g': elasticsearch_memory.max[:-1]|int*1024*1024})|list)[0]|int   > ansible_memtotal_mb * 0.5 "
+
