@@ -20,4 +20,4 @@ http.port: {{ elasticsearch_http_port }}
 
 #################################### Discovery ################################
 discovery.zen.ping.unicast.hosts:  [{% for item in groups[elasticsearch_hosts_group] %} '{{ hostvars[item]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}'{% if not loop.last %}, {% endif %} {% endfor %}]
-
+discovery.zen.minimum_master_nodes: 1
