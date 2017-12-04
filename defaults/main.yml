@@ -25,6 +25,9 @@ elasticsearch_install_dir: "{{ ansible_user_dir }}/elasticsearch"
 
 # Configuration
 elasticsearch_instance_name: "fromage"
+elasticsearch_memory:
+  min: 1m
+  max: 2m
 
 #Cluster
 elasticsearch_cluster_name: "elasticsearch_cluster"
