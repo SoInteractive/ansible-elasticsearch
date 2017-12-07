@@ -38,6 +38,10 @@
   register: config_updated
   notify: restart elasticsearch
 
+- name: Enable ES service
+  service:
+    name: elasticsearch
+    enabled: yes
 
 # - name: Install additional plugins
 #   elasticsearch_plugin:
