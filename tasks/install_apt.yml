@@ -22,3 +22,9 @@
     name: "elasticsearch{% if elasticsearch_version != '' %}={{ es_version }}{% endif %}"
     state: present
     cache_valid_time: 86400
+
+- name: Adjust system settings
+  sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
