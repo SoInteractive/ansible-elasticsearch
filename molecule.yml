@@ -22,3 +22,10 @@ docker:
       image: jpetazzo/dind
       image_version: latest
       privileged: True
+test_sequence:
+  - destroy
+  - create
+  - converge
+  # - idempotence
+  - lint
+  - verify
