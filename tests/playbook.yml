@@ -12,4 +12,3 @@
 - hosts: all
   roles:
     - ansible-elasticsearch
-
