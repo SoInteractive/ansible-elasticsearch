@@ -16,5 +16,4 @@ galaxy_info:
   - elasticsearch
   - database
 
-dependencies:
-- SoInteractive.java
+dependencies: []

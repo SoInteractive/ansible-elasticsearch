@@ -23,5 +23,14 @@ Use it in a playbook as follows:
     - SoInteractive.elasticsearch
 ```
 
+At least one master node has to be specified
+```yaml
+all:
+  hosts:
+    mysrv:
+      ansible_host: 127.0.3.1
+      elasticsearch_master_node: true
+```
+
 Have a look at the [defaults/main.yml](defaults/main.yml) for role variables
 that can be overridden.
