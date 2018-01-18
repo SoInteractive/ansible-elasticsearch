@@ -12,23 +12,6 @@
   tags:
     - always
 
-- include: install_apt.yml
-  become: yes
-  when:
-    - ansible_pkg_mgr == "apt"
-    - not elasticsearch_user_install
-
-- include: install_yum.yml
-  become: yes
-  when:
-    - ansible_pkg_mgr == "yum"
-    - not elasticsearch_user_install
-
-#- include: install_tar.yml
-#  become: no
-#  when:
-#    - elasticsearch_user_install
-
-- include: configure.yml
+- include: install.yml
 
 - include: plugins.yml

@@ -1,50 +1,15 @@
 ---
-- name: Adjust system settings
-  sysctl:
-    name: vm.max_map_count
-    value: 262144
-    state: present
 
-- name: Create Directories
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
-  with_items:
-    - "{{ elasticsearch_pid_dir }}"
-    - "{{ elasticsearch_work_dir }}"
-    - "{{ elasticsearch_log_dir }}"
-    - "{{ elasticsearch_conf_dir }}"
-
-- name: Create Data Directories
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
-  with_items:
-    - "{{ elasticsearch_data_dirs }}"
-
-- name: adjust jvm settings
-  template:
-    src: jvm.options.j2
-    dest: "{{ elasticsearch_conf_dir }}/jvm.options"
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
-    mode: 0644
-
-- name: Copy Configuration File
-  template:
-    src: elasticsearch.yml.j2
-    dest: "{{ elasticsearch_conf_dir }}/elasticsearch.yml"
-    owner: "{{ elasticsearch_user }}"
-    group: "{{ elasticsearch_group }}"
-    mode: 0644
-  register: config_updated
-  notify: restart elasticsearch
-
-- name: Enable ES service
-  service:
-    name: elasticsearch
-    enabled: yes
+- name: Restart Elasticsearch container
+  docker_container:
+    name: "{{ elasticsearch_docker_container_name }}"
+    image: "docker.elastic.co/elasticsearch/elasticsearch:{{ elasticsearch_version }}"
+    state: started
+    network_mode: host
+    restart_policy: "unless-stopped"
+    ports:
+      - "{{ elasticsearch_http_port }}:9200"
+      - "{{ elasticsearch_transport_port }}:9300"
+    volumes:
+      - "elasticsearch_data_dir:/usr/share/elasticsearch/data:rw"
+    env: "{{ elasticsearch_options | combine(elasticsearch_additional_options) }}"

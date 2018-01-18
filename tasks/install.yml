@@ -1,0 +1,42 @@
+---
+- name: Install python-pip
+  package:
+    name: python-pip
+    state: present
+
+- name: Install docker-py
+  pip:
+    name: docker-py
+
+- name: Set Elasticsearch options
+  set_fact:
+    elasticsearch_options:
+      ES_JAVA_OPTS: "-Xms{{ elasticsearch_memory }} -Xmx{{ elasticsearch_memory }}"
+      cluster.name: "{{ elasticsearch_cluster_name }}"
+      node.name: "{{ inventory_hostname }}-{{ elasticsearch_instance_name }}"
+      bootstrap.memory_lock: "false"
+      discovery.zen.ping.unicast.hosts: "{% for item in ansible_play_hosts %} {{ hostvars[item]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}{% if not loop.last %}, {% endif %}{% endfor %}"
+      discovery.zen.minimum_master_nodes: "1"
+      node.master: "{% if elasticsearch_master_node %}true{% else %}false{% endif %}"
+      node.data: "{% if elasticsearch_data_node %}true{% else %}false{% endif %}"
+      node.ingest: "{% if elasticsearch_ingest_node %}true{% else %}false{% endif %}"
+
+- name: Adjust system settings
+  sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
+
+- name: Install Elasticsearch
+  docker_container:
+    name: "{{ elasticsearch_docker_container_name }}"
+    image: "{{ elasticsearch_docker_image_source }}:{{ elasticsearch_version }}"
+    state: started
+    network_mode: "{{ elasticsearch_docker_network_mode }}"
+    restart_policy: "{{ elasticsearch_docker_restart_policy }}"
+    ports:
+      - "{{ elasticsearch_http_port }}:9200"
+      - "{{ elasticsearch_transport_port }}:9300"
+    volumes:
+      - "elasticsearch_data_dir:/usr/share/elasticsearch/data:rw"
+    env: "{{ elasticsearch_options | combine(elasticsearch_additional_options) }}"

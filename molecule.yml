@@ -1,38 +1,31 @@
 ---
 ansible:
-#  verbose: vvv
   playbook: tests/playbook.yml
+  host_vars:
+    node01:
+      elasticsearch_master_node: true
 driver:
   name: docker
 verifier:
   name: testinfra
 docker:
   containers:
-    - name: elasticsearch-xenial
-      image: solita/ubuntu-systemd
-      image_version: 16.04
-      privileged: true
-
-#    - name: elasticsearch-centos
-#      image: centos/systemd
-#      image_version: latest
-#      privileged: true
-
-    - name: elasticsearch-node01
-      image: solita/ubuntu-systemd
-      image_version: 16.04
-      privileged: true
-      ansible_groups:
-        - elasticsearch
-    - name: elasticsearch-node02
-      image: solita/ubuntu-systemd
-      image_version: 16.04
-      privileged: true
-      ansible_groups:
-        - elasticsearch
-    - name: elasticsearch-node03
-      image: solita/ubuntu-systemd
-      image_version: 16.04
-      privileged: true
-      ansible_groups:
-        - elasticsearch
+    - name: node01
+      image: jpetazzo/dind
+      image_version: latest
+      privileged: True
+    - name: node02
+      image: jpetazzo/dind
+      image_version: latest
+      privileged: True
+    - name: node03
+      image: jpetazzo/dind
+      image_version: latest
+      privileged: True
+test_sequence:
+  - destroy
+  - create
+  - converge
+  # - idempotence
+  - lint
+  - verify
