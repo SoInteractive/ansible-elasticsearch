@@ -11,3 +11,4 @@
   failed_when: "'ERROR' in plugin_installed.stdout"
   changed_when: plugin_installed.rc == 0
   with_items: "{{ elasticsearch_plugins }}"
+  notify: Restart container

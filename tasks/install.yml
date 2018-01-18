@@ -21,13 +21,19 @@
       node.data: "{% if elasticsearch_data_node %}true{% else %}false{% endif %}"
       node.ingest: "{% if elasticsearch_ingest_node %}true{% else %}false{% endif %}"
 
-- name: Download Elasticsearch container
+- name: Adjust system settings
+  sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
+
+- name: Install Elasticsearch
   docker_container:
     name: "{{ elasticsearch_docker_container_name }}"
-    image: "docker.elastic.co/elasticsearch/elasticsearch:{{ elasticsearch_version }}"
+    image: "{{ elasticsearch_docker_image_source }}:{{ elasticsearch_version }}"
     state: started
-    network_mode: host
-    restart_policy: "unless-stopped"
+    network_mode: "{{ elasticsearch_docker_network_mode }}"
+    restart_policy: "{{ elasticsearch_docker_restart_policy }}"
     ports:
       - "{{ elasticsearch_http_port }}:9200"
       - "{{ elasticsearch_transport_port }}:9300"

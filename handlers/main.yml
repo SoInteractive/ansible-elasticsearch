@@ -1,15 +1,16 @@
----
-
-- name: Restart Elasticsearch container
+- name: Restart container
   docker_container:
     name: "{{ elasticsearch_docker_container_name }}"
-    image: "docker.elastic.co/elasticsearch/elasticsearch:{{ elasticsearch_version }}"
-    state: started
-    network_mode: host
-    restart_policy: "unless-stopped"
+    image: "{{ elasticsearch_docker_image_source }}:{{ elasticsearch_version }}"
+    state: "{{ item }}"
+    network_mode: "{{ elasticsearch_docker_network_mode }}"
+    restart_policy: "{{ elasticsearch_docker_restart_policy }}"
     ports:
       - "{{ elasticsearch_http_port }}:9200"
       - "{{ elasticsearch_transport_port }}:9300"
     volumes:
       - "elasticsearch_data_dir:/usr/share/elasticsearch/data:rw"
     env: "{{ elasticsearch_options | combine(elasticsearch_additional_options) }}"
+  with_items:
+    - stopped
+    - started

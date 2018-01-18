@@ -18,9 +18,14 @@ elasticsearch_hosts_group: "elasticsearch"
 # Additional plugins
 elasticsearch_plugins: []
 
+# Docker settings
 elasticsearch_docker_cluster_name: "docker-cluster"
 elasticsearch_docker_container_name: "elasticsearch"
+elasticsearch_docker_network_mode: "host"
+elasticsearch_docker_restart_policy: "unless-stopped"
+elasticsearch_docker_image_source: "docker.elastic.co/elasticsearch/elasticsearch"
 
+# Additional settings
 elasticsearch_master_node: false
 elasticsearch_data_node: true
 elasticsearch_ingest_node: true
