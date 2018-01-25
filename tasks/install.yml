@@ -15,7 +15,7 @@
       cluster.name: "{{ elasticsearch_cluster_name }}"
       node.name: "{{ inventory_hostname }}-{{ elasticsearch_instance_name }}"
       bootstrap.memory_lock: "false"
-      discovery.zen.ping.unicast.hosts: "{% for item in ansible_play_hosts %} {{ hostvars[item]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}{% if not loop.last %}, {% endif %}{% endfor %}"
+      discovery.zen.ping.unicast.hosts: "{% for item in ansible_play_hosts %}{{ hostvars[item]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"
       discovery.zen.minimum_master_nodes: "1"
       node.master: "{% if elasticsearch_master_node %}true{% else %}false{% endif %}"
       node.data: "{% if elasticsearch_data_node %}true{% else %}false{% endif %}"
