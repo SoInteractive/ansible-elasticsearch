@@ -16,3 +16,13 @@ def test_packages(Package, SystemInfo):
             for package in present:
                 p = Package(package)
                 assert p.is_installed
+
+
+def test_socket(host):
+    present = [
+        "tcp://127.0.0.1:9200",
+        "tcp://127.0.0.1:9300"
+    ]
+    for socket in present:
+        s = host.socket(socket)
+        assert s.is_listening
