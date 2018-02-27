@@ -9,7 +9,7 @@ elasticsearch_version: '6.1.1'
 
 # Configuration
 elasticsearch_instance_name: "fromage"
-elasticsearch_memory: 1g
+elasticsearch_memory: "{{ ansible_memtotal_mb // 2 }}m"
 
 # Cluster
 elasticsearch_cluster_name: "elasticsearch_cluster"
