@@ -7,6 +7,10 @@ Ansible Role: elasticsearch
 
 Elasticsearch, distributed, RESTful search and analytics engine
 
+# :warning: IMPORTANT NOTICE
+
+THIS PROJECT IS ABANDONED. WE DO NOT ACCEPT ANY NEW ISSUES AND/OR PULL REQUESTS.
+
 Disclaimer
 ----------
 
