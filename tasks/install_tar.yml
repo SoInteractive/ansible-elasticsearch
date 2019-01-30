@@ -1,0 +1,27 @@
+---
+- name: Download Elasticsearch locally
+  get_url:
+    url: "{{ elasticsearch_download_url }}"
+    dest: "/tmp/elasticsearch-{{ elasticsearch_version }}.tar.gz"
+  delegate_to: localhost
+
+- name: Extract Elasticsearch archive
+  unarchive:
+    src: "/tmp/elasticsearch-{{ elasticsearch_version }}.tar.gz"
+    dest: "{{ elasticsearch_install_dir }}"
+
+- name: Add ES_HOME variable
+  lineinfile:
+    dest: "{{ ansible_user_dir }}/.profile"
+    line: "export ES_HOME={{ elasticsearch_home_dir }}"
+    regexp: "export ES_HOME=*"
+
+- name : Copy config dir (add synonims and dictionaries)
+  copy:
+    src: "config"
+    dest: "{{ elasticsearch_home_dir }}/"
+
+- name: Configuring Elasticsearch elasticsearch.yml Node
+  template:
+    src: elasticsearch.yml.j2
+    dest: "{{ elasticsearch_home_dir }}/config/elasticsearch.yml"

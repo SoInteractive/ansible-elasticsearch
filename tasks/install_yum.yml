@@ -1,0 +1,20 @@
+---
+- name: Install dependencies
+  yum:
+    name: libselinux-python
+    state: present
+
+- name: Add elasticsearch repository [CentOS]
+  template:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+
+- name: RedHat - Install Elasticsearch
+  yum:
+    name: "elasticsearch{% if elasticsearch_version != ''  %}-{{ elasticsearch_version }}{% endif %}"
+    state: present
+    update_cache: yes
+  register: redhat_elasticsearch_install_from_repo
+  until: '"failed" not in redhat_elasticsearch_install_from_repo'
+  retries: 5
+  delay: 10

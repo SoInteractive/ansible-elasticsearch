@@ -1,36 +1,38 @@
 ---
+
+elasticsearch_user: elasticsearch
+elasticsearch_group: elasticsearch
+
+elasticsearch_pid_dir: "/var/run/elasticsearch"
+elasticsearch_log_dir: "/var/log/elasticsearch"
+elasticsearch_conf_dir: "/etc/elasticsearch"
+elasticsearch_work_dir: "/tmp/elasticsearch"
+elasticsearch_data_dirs:
+  - "/var/lib/elasticsearch"
+elasticsearch_home: "/usr/share/elasticsearch"
+
 elasticsearch_interface: "{{ ansible_default_ipv4.interface }}"
 
 elasticsearch_address: "{{ hostvars[inventory_hostname]['ansible_' + elasticsearch_interface]['ipv4']['address'] }}"
 elasticsearch_http_port: 9200
-elasticsearch_transport_port: 9300
 
-elasticsearch_version: '6.1.1'
+#elasticsearch_version: "2.4.3"
+elasticsearch_version: ''
+
+# TAR-based user install
+elasticsearch_user_install: False
+elasticsearch_install_dir: "{{ ansible_user_dir }}/elasticsearch"
 
 # Configuration
 elasticsearch_instance_name: "fromage"
-elasticsearch_memory: "{{ ansible_memtotal_mb // 2 }}m"
+elasticsearch_memory:
+  min: 1m
+  max: 2m
 
-# Cluster
+#Cluster
 elasticsearch_cluster_name: "elasticsearch_cluster"
 elasticsearch_hosts_group: "elasticsearch"
 
 # Additional plugins
-elasticsearch_plugins: []
-
-# Docker settings
-elasticsearch_docker_cluster_name: "docker-cluster"
-elasticsearch_docker_container_name: "elasticsearch"
-elasticsearch_docker_network_mode: "host"
-elasticsearch_docker_restart_policy: "unless-stopped"
-elasticsearch_docker_image_source: "docker.elastic.co/elasticsearch/elasticsearch"
-
-# Additional settings
-elasticsearch_master_node: false
-elasticsearch_data_node: true
-elasticsearch_ingest_node: true
-
-elasticsearch_additional_options: {}
-# elasticsearch_additional_options:
-#   discovery.zen.minimum_master_nodes: "5"
-#   ...
+elasticsearch_plugins:
+  - plugin: mobz/elasticsearch-head

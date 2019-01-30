@@ -1,5 +1,5 @@
 ---
-- name: Check if max memory does not exceeded recommended value
+- name: check if max memory exceeded recommended value
   fail:
-    msg: Maximum memory for elasticsearch should not be greater than half of physical RAM
-  when: " ([elasticsearch_memory[-1]]|map('extract', {'m': elasticsearch_memory[:-1]|int, 'g': elasticsearch_memory[:-1]|int*1024})|list)[0]|int > ansible_memtotal_mb * 0.5 "
+    msg: Maximum memory for elasticsearch should not be greater than half of physycal RAM
+  when: " ([elasticsearch_memory.max[-1]]|map('extract', {'m': elasticsearch_memory.max[:-1]|int, 'g': elasticsearch_memory.max[:-1]|int*1024})|list)[0]|int   > ansible_memtotal_mb * 0.5 "
